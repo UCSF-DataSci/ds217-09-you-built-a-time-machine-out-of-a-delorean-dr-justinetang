@@ -1,0 +1,18 @@
+
+Timezone Operations Report
+
+1. Original timezone:
+The original patient_vitals dataset contained naive datetime objects.
+
+2. Localization method:
+Naive datetime indices were localized to UTC using tz_localize('UTC').
+
+3. Conversion:
+Converted to US/Eastern using tz_convert('US/Eastern').
+
+4. DST handling:
+UTC avoids ambiguity from daylight saving time transitions.
+Example: March 12, 2023, 10:00:00 UTC converts to 06:00:00 in US/Eastern.
+
+5. Recommendation:
+Store temporal data in UTC internally, convert to local timezones only for reporting or visualization.
