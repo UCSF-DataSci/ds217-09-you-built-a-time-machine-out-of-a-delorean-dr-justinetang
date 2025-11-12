@@ -1,12 +1,18 @@
- Timezone Operations Report
-TODO: Document your timezone operations:
- 1. Original timezone:
- The original patient_vitals dataset contained naive data.
- 2. Localization method:
- Native datatime indices were localized to UTC using tz_localize('UTC').
- 3. Conversion:
- UTC timestamps were converted to 'US/Eastern' timezone.
- 4. DST handling:
- Using UTC as the base timezone avoids ambuguity caused by daylight saving time transitions. 
- 5. For example, '2023-03-12 10:00:00' UTC converts to '2023-03-12 06:00:00' in US/Eastern before DST jump and correctly handles the missing hour. Storing timestamps in UTC ensures calculations, comparison, and merging across sites are unambiguous. 
+Timezone Operations Report
+
+1. Original timezone:
+The original patient_vitals dataset contained naive datetime objects (no timezone info).
+
+2. Localization method:
+Naive datetime indices were localized to UTC using tz_localize('UTC') to make them timezone-aware.
+
+3. Conversion:
+The UTC timestamps were then converted to US/Eastern using tz_convert('US/Eastern') for local interpretation.
+
+4. DST handling:
+Using UTC as the base timezone avoids ambiguity caused by daylight saving time transitions. For example, March 12, 2023, 10:00:00 UTC converts to 06:00:00 in US/Eastern before the DST jump. Storing timestamps in UTC ensures calculations, comparisons, and merging across sites are unambiguous.
+
+5. Example:
+Original UTC timestamp: {dst_date_utc}
+Converted Eastern timestamp: {dst_time_eastern}
 
