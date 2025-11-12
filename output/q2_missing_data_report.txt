@@ -1,0 +1,94 @@
+
+Missing Data Handling Report
+
+1. Missing value summary:
+Total missing values: 323
+Percentage missing: 96.42%
+
+2. Missing data patterns:
+Missing by month:
+date
+1      0
+2     27
+3     30
+4     29
+5     30
+6     29
+7     30
+8     30
+9     29
+10    30
+11    29
+12    30
+Name: temperature, dtype: int64
+
+Missing by day of week (Mon=0):
+date
+0    46
+1    45
+2    47
+3    46
+4    46
+5    47
+6    46
+Name: temperature, dtype: int64
+
+3. Imputation methods applied:
+- Forward fill (ts_ffill)
+- Backward fill (ts_bfill)
+- Linear interpolation (ts_interpolated_linear)
+- Time-based interpolation (ts_interpolated_time)
+- Rolling mean imputation with 3-day window (ts_rolling_imputed)
+
+4. Rationale:
+Forward/backward fill maintains last known value and is simple for short gaps.
+Interpolation estimates missing values based on surrounding known points.
+Rolling mean smooths out fluctuations and reduces noise in imputed values.
+
+5. Pros and cons:
+- Forward/backward fill: Simple but can propagate errors if gaps are long.
+- Interpolation: Captures trends but may underestimate variability.
+- Rolling mean: Smooths but introduces lag.
+
+6. Examples:
+Original missing data (first 10 days of January):
+date
+2023-01-31    98.777
+2023-02-01       NaN
+2023-02-02       NaN
+2023-02-03       NaN
+2023-02-04       NaN
+2023-02-05       NaN
+2023-02-06       NaN
+2023-02-07       NaN
+2023-02-08       NaN
+2023-02-09       NaN
+Freq: D, Name: temperature, dtype: float64
+
+Forward fill imputed values:
+date
+2023-01-31    98.777
+2023-02-01    98.777
+2023-02-02    98.777
+2023-02-03    98.777
+2023-02-04    98.777
+2023-02-05    98.777
+2023-02-06    98.777
+2023-02-07    98.777
+2023-02-08    98.777
+2023-02-09    98.777
+Freq: D, Name: temperature, dtype: float64
+
+Linear interpolation imputed values:
+date
+2023-01-31    98.777000
+2023-02-01    98.785011
+2023-02-02    98.793021
+2023-02-03    98.801031
+2023-02-04    98.809041
+2023-02-05    98.817052
+2023-02-06    98.825062
+2023-02-07    98.833072
+2023-02-08    98.841082
+2023-02-09    98.849092
+Freq: D, Name: temperature, dtype: float64
