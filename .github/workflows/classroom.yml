@@ -40,7 +40,8 @@ jobs:
 
     - name: Generate data
       run: |
-        jupyter nbconvert --to notebook --execute data_generator.ipynb
+       pip install jupyter
+       jupyter nbconvert --to notebook --execute data_generator.ipynb
 
     - name: Execute assignment notebooks
       run: |
